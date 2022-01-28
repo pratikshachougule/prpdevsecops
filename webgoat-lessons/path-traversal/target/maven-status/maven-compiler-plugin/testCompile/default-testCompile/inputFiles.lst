@@ -1,0 +1,4 @@
+/root/webGoat_java/webgoat-lessons/path-traversal/src/test/java/org/owasp/webgoat/path_traversal/ProfileUploadRemoveUserInputTest.java
+/root/webGoat_java/webgoat-lessons/path-traversal/src/test/java/org/owasp/webgoat/path_traversal/ProfileUploadRetrievalTest.java
+/root/webGoat_java/webgoat-lessons/path-traversal/src/test/java/org/owasp/webgoat/path_traversal/ProfileUploadFixTest.java
+/root/webGoat_java/webgoat-lessons/path-traversal/src/test/java/org/owasp/webgoat/path_traversal/ProfileUploadTest.java

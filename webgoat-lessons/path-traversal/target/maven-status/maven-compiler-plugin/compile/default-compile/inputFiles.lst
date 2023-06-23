@@ -1,6 +1,0 @@
-/root/webGoat_java/webgoat-lessons/path-traversal/src/main/java/org/owasp/webgoat/path_traversal/ProfileUploadFix.java
-/root/webGoat_java/webgoat-lessons/path-traversal/src/main/java/org/owasp/webgoat/path_traversal/ProfileUploadRetrieval.java
-/root/webGoat_java/webgoat-lessons/path-traversal/src/main/java/org/owasp/webgoat/path_traversal/ProfileUploadBase.java
-/root/webGoat_java/webgoat-lessons/path-traversal/src/main/java/org/owasp/webgoat/path_traversal/ProfileUploadRemoveUserInput.java
-/root/webGoat_java/webgoat-lessons/path-traversal/src/main/java/org/owasp/webgoat/path_traversal/PathTraversal.java
-/root/webGoat_java/webgoat-lessons/path-traversal/src/main/java/org/owasp/webgoat/path_traversal/ProfileUpload.java

@@ -1,3 +1,94 @@
+# DevSecOps 
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+DevOps is a combination of cultural philosophies, practices, and tools that combine software development with information technology operations. These combined practices enable companies to deliver new application features and improved services to customers at a higher velocity
+
+Security testing is often treated as an ‘after the process’ necessity. This leaves the ongoing operations defenseless to malicious attacks. 
+Application security testing is done after the software delivery. With this approach security defects are found at the last stage, and it's very expensie and time consuming process to eliminate those defects. In that case security as a part of process is the only only way to ensure safety. 
+
+### DevSecOps is the ideology to integrate security practices into the software devlopment life cycle, create security as code culture.
+
+Advantages of DevSecOps:
+ * Early identification of vulnerabilities in code during development
+ * Greater flexibility in managing sudden changes during the development lifecycle
+
+### Integrate Security checks into jenkins pipeline 
+
+To implement devsecops pipeline we are using java based vulnerable WebGoat application. We are injectiong following security checks into jenkins pipeline.
+
+  * Pre-commit hooks
+  * Secret Scanning
+  * SCA (Source composition analysis)
+  * SAST (Static Application Security Testing)
+  * DAST (Dynamic Application Security Testing)
+  * Security monitoring and infrastructure misconfigurations
+  * Vulnerability assessment
+  * Vulnerability management
+
+![DevSecOps_pipeline](https://github.com/Suyashk96/DevSecOps_webgoat/blob/master/DevSecOps_case_study.jpg)
+
+## Secure Development Processes
+
+* [DevSecOps Guidlines](https://owasp.org/www-project-devsecops-guideline/)
+* [OWASP secure coding practices](https://www.owasp.org/images/0/08/OWASP_SCP_Quick_Reference_Guide_v2.pdf)
+* [Java-SE](https://www.oracle.com/java/technologies/javase/seccodeguide.html) - Secure Coding Guidelines for Java SE
+
+## Awareness of Security Risks
+
+* [OWASP Top 10](https://owasp.org/www-project-top-ten/) - Top 10 security risks from OWASP 
+
+# Tools and Resources
+
+## Pre-commit or Pre-push hooks
+
+Prevents developer from commiting senstitive information such as SSH keys, API keys, passwords, AWS keys. It validates the outgoing changeset for things that look suspicious.
+
+* [Tailsman](https://github.com/thoughtworks/talisman)
+
+## Secret Scanning
+
+Searches through git repositories for secrets, digging deep into commit history and branches. This is effective at finding secrets accidentally committed 
+
+* [TruffelHog](https://github.com/trufflesecurity/truffleHog)
+
+## SCA (Source composition analysis)
+
+Software Composition Analysis (SCA) tools find common open source libraries and components used in application, Compare findings to a list of known vulnerabilities (e.g., Common Vulnerabilities and Exposures, or CVEs) and determine whether components have known and documented vulnerabilities, are out of date, and have patches available
+
+* [OWASP Dependancy Check](https://github.com/jeremylong/DependencyCheck)
+
+## SAST (Static Application Security Testing)
+
+SAST tools analyse source code to look for security issues in an application during non-running state, and are supported by a large number of languages. They usually have quite a high false positive rate, due to the fact they cannot track data through an app, instead using a bit of guesswork to determine if flaws exist.
+
+* [SonarQube](https://www.sonarqube.org/) 
+
+## DAST (Dynamic Application Security Testing)
+
+DAST tools run automated penetration testing scans against a running service as a blackbox. It tries to hack into the service using well known vulnerabilities, however scans can take a while due to the vast number, as well as crawling services to find all the endpoints.
+
+* [OWASP ZAP](https://github.com/zaproxy/zaproxy)
+
+## Security monitoring and infrastructure misconfigurations
+
+Continuously scan your AWS accounts for configuration errors using various security standards and roll up security check results at the account and multi-account level to understand your overall security state.
+
+AWS Security Hub collects and consolidates findings from AWS security services enabled in your environment, such as intrusion detection findings from Amazon GuardDuty, vulnerability scans from Amazon Inspector, and S3 bucket policy findings from Amazon Macie.
+
+* [AWS Security Hub](https://aws.amazon.com/security-hub/?aws-security-hub-blogs.sort-by=item.additionalFields.createdDate&aws-security-hub-blogs.sort-order=desc)
+
+## Vulnerability assessment 
+
+The vulnerability assessment tool scans the underlying infrastructure, it runs tests against client computers using a database of known exploits and weaknesses. It looks for host, os level vulnerabilities. 
+
+* [OpenVas](https://github.com/greenbone/openvas-scanner)
+
+
+
+
 # WebGoat 8: A deliberately insecure Web Application
 
 [![Build Status](https://travis-ci.org/WebGoat/WebGoat.svg?branch=develop)](https://travis-ci.org/WebGoat/WebGoat)
@@ -26,120 +117,14 @@ you are caught engaging in unauthorized hacking, most companies will fire you.
 Claiming that you were doing security research will not work as that is the
 first thing that all hackers claim.*
 
-# Installation Instructions:
-
-## 1. Run using Docker
-
-Every release is also published on [DockerHub]((https://hub.docker.com/r/webgoat/webgoat-8.0/)).
-
-### Using docker run
-
-The easiest way to start WebGoat as a Docker container is to use the all-in-one docker container. This is a docker image that has WebGoat and WebWolf running inside.
-
-```shell
-docker run -p 8080:8080 -p 9090:9090 -e TZ=Europe/Amsterdam webgoat/goatandwolf
-```
-
-WebGoat will be located at: http://127.0.0.1:8080/WebGoat
-WebWolf will be located at: http://127.0.0.1:9090/WebWolf
-
-**Important**: Choose the correct timezone, so that the docker container and your host are in the same timezone. As it important for the validity of JWT tokens used in certain exercises.
-
-### Using docker stack deploy
-
-Another way to deply WebGoat and WebWolf in a more advanced way is to use a compose-file in a docker stack deploy.
-You can define which containers should run in which combinations and define all of this in a yaml file.
-An example of such a file is: [goat-with-reverseproxy.yaml](goat-with-reverseproxy.yaml)
-
-This sets up an nginx webserver as reverse proxy to WebGoat and WebWolf. You can change the timezone by adjusting the value in the yaml file.
-
-```shell
-docker stack init
-docker stack deploy --compose-file goat-with-reverseproxy.yaml webgoatdemo
-```
-
-Add the following entries in your local hosts file:
-
-```shell
-127.0.0.1 www.webgoat.local www.webwolf.localhost
-```
-
-You can use the overall start page: http://www.webgoat.local or:
-
-WebGoat will be located at: http://www.webgoat.local/WebGoat
-
-WebWolf will be located at: http://www.webwolf.local/WebWolf
-
-**Important**: the current directory on your host will be mapped into the container for keeping state.
-
-## 2. Standalone
-
-Download the latest WebGoat and WebWolf release from [https://github.com/WebGoat/WebGoat/releases](https://github.com/WebGoat/WebGoat/releases)
-
-```Shell
-java -jar webgoat-server-8.1.0.jar [--server.port=8080] [--server.address=localhost]
-java -jar webwolf-8.1.0.jar [--server.port=9090] [--server.address=localhost]
-```
-
-The latest version of WebGoat needs Java 11 or above. By default WebGoat and WebWolf start on port 8080,9000 and 9090 with the environment variable WEBGOAT_PORT, WEBWOLF_PORT and WEBGOAT_HSQLPORT you can set different values.
-```Shell
-export WEBGOAT_PORT=18080
-export WEBGOAT_HSQLPORT=19001
-export WEBWOLF_PORT=19090
-java -jar webgoat-server-8.1.0.jar
-java -jar webwolf-8.1.0.jar 
-```
-Use set in stead of export on Windows cmd. 
-
-
-## 3. Run from the sources
-
 ### Prerequisites:
 
 * Java 11
 * Maven > 3.2.1
 * Your favorite IDE
 * Git, or Git support in your IDE
-
-Open a command shell/window:
-
-```Shell
-git clone git@github.com:WebGoat/WebGoat.git
-```
-
-Now let's start by compiling the project.
-
-```Shell
-cd WebGoat
-git checkout <<branch_name>>
-mvn clean install
-```
-
-Now we are ready to run the project. WebGoat 8.x is using Spring-Boot.
-
-```Shell
-mvn -pl webgoat-server spring-boot:run
-```
-... you should be running webgoat on localhost:8080/WebGoat momentarily
-
-
-To change IP address add the following variable to WebGoat/webgoat-container/src/main/resources/application.properties file
-
-```
-server.address=x.x.x.x
-```
-
-## 4. Run with custom menu
-
-For specialist only. There is a way to set up WebGoat with a personalized menu. You can leave out some menu categories or individual lessons by setting environment variables.
-
-For instance running as a jar on a Linux/MacOS it will look like:
-```Shell
-export EXCLUDE_CATEGORIES="CLIENT_SIDE,GENERAL,CHALLENGE"
-export EXCLUDE_LESSONS="SqlInjectionAdvanced,SqlInjectionMitigations"
-java -jar webgoat-server/target/webgoat-server-v8.2.0-SNAPSHOT.jar
-```
-Or in a docker run it would (once this version is pushed into docker hub) look like:
-```Shell
-docker run -d -p 80:8888 -p 8080:8080 -p 9090:9090 -e TZ=Europe/Amsterdam -e EXCLUDE_CATEGORIES="CLIENT_SIDE,GENERAL,CHALLENGE" -e EXCLUDE_LESSONS="SqlInjectionAdvanced,SqlInjectionMitigations" webgoat/goatandwolf
-```
+* Jenkins
+* Sonarqube
+* Zap proxy
+* Defectdojo
+* Dependency check

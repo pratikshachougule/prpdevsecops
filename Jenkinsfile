@@ -33,15 +33,15 @@ pipeline {
             }
         }
     
-   //  stage ('Static analysis - SonarQube') {
-   //    steps {
-   //      withSonarQubeEnv('sonar') {
-   //        sh 'mvn sonar:sonar'
-	  // //sh 'sudo python3 sonarqube.py'
-	  // sh './sonarqube_report.sh'
-   //      }
-   //    }
-   //  }
+    stage ('SAST - SonarQube') {
+      steps {
+        withSonarQubeEnv('sonarqube-token') {
+          sh 'mvn sonar:sonar'
+	  //sh 'sudo python3 sonarqube.py'
+	  //sh './sonarqube_report.sh'
+        }
+      }
+    }
 	  
 //       stage ('SAST-SemGrep') {
 // 	      steps {

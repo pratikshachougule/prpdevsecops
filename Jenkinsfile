@@ -67,7 +67,7 @@ pipeline {
     //   }
     // }  
 	  
-    stage ('Deploy to server') {
+   // stage ('Deploy to server') {
   //           steps {
   //          sshagent(['application_server']) {
   //               sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/DemoProject/webgoat-server/target/webgoat-server-v8.2.0-SNAPSHOT.jar ubuntu@43.204.29.113:/WebGoat'

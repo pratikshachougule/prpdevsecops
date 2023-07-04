@@ -36,7 +36,7 @@ pipeline {
     stage ('SAST - SonarQube') {
       steps {
         withSonarQubeEnv('sonarqube') {
-          sh 'mvn sonar:sonar'
+          sh 'mvn clean deploy sonar:sonar'
 	  //sh 'sudo python3 sonarqube.py'
 	  //sh './sonarqube_report.sh'
         }

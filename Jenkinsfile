@@ -67,21 +67,21 @@ pipeline {
       }
     }  
 	  
-   // stage ('Deploy to server') {
-  //           steps {
-  //          sshagent(['application_server']) {
-  //               sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/DemoProject/webgoat-server/target/webgoat-server-v8.2.0-SNAPSHOT.jar ubuntu@43.204.29.113:/WebGoat'
-		// sh 'ssh -o  StrictHostKeyChecking=no ubuntu@43.204.29.113 "nohup java -jar /WebGoat/webgoat-server-v8.2.0-SNAPSHOT.jar &"'
-  //             }      
-  //          }     
-  //   }
+   stage ('Deploy to server') {
+            steps {
+           sshagent(['app_server']) {
+                sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/DemoProject/webgoat-server/target/webgoat-server-v8.2.0-SNAPSHOT.jar apps@10.97.109.244:~/WebGoat'
+		sh 'ssh -o  StrictHostKeyChecking=no apps@10.97.109.244 "nohup java -jar /WebGoat/webgoat-server-v8.2.0-SNAPSHOT.jar &"'
+              }      
+           }     
+    }
    
   //   stage ('Dynamic analysis') {
   //           steps {
-  //          sshagent(['application_server']) {
-  //               //sh 'ssh -o  StrictHostKeyChecking=no ubuntu@13.233.123.52 "sudo docker run --rm -v /home/ubuntu:/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t http://43.204.29.113/WebGoat -x zap_report || true" '
-		// sh 'ssh -o  StrictHostKeyChecking=no ubuntu@13.233.123.52 "sudo docker run --rm -v /home/ubuntu:/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t http://43.204.29.113:8081/WebGoat -x zap_report -n defaultcontext.context || true" '
-		// sh 'ssh -o  StrictHostKeyChecking=no ubuntu@13.233.123.52 "sudo ./zap_report.sh"'
+  //          sshagent(['dast_server']) {
+  //               //sh 'ssh -o  StrictHostKeyChecking=no apps@10.97.109.243 "sudo docker run --rm -v /home/apps:/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t http://10.97.109.244/WebGoat -x zap_report || true" '
+		// sh 'ssh -o  StrictHostKeyChecking=no apps@10.97.109.243 "sudo docker run --rm -v /home/apps:/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t http://10.97.109.244:8081/WebGoat -x zap_report -n defaultcontext.context || true" '
+		// sh 'ssh -o  StrictHostKeyChecking=no apps@10.97.109.243 "sudo ./zap_report.sh"'
   //             }      
   //          }       
   //   }

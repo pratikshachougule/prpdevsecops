@@ -61,11 +61,11 @@ pipeline {
 //         	}
 //       	}
     
-    // stage ('Generate build') {
-    //   steps {
-    //     sh 'mvn clean install -DskipTests'
-    //   }
-    // }  
+    stage ('Generate build') {
+      steps {
+        sh 'mvn clean install -DskipTests'
+      }
+    }  
 	  
    // stage ('Deploy to server') {
   //           steps {

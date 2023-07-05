@@ -70,7 +70,7 @@ pipeline {
    stage ('Deploy to server') {
             steps {
            sshagent(['app-server']) {
-                sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/DemoProject/webgoat-server/target/webgoat-server-v8.2.0-SNAPSHOT.jar apps@10.97.109.244:~/WebGoat'
+                sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/webgoat-devsecops/webgoat-server/target/webgoat-server-v8.2.0-SNAPSHOT.jar apps@10.97.109.244:~/WebGoat'
 		sh 'ssh -o  StrictHostKeyChecking=no apps@10.97.109.244 "nohup java -jar /WebGoat/webgoat-server-v8.2.0-SNAPSHOT.jar &"'
               }      
            }     

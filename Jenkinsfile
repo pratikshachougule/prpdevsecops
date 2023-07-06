@@ -13,35 +13,35 @@ pipeline {
       }
      }
     
- //    stage ('Check secrets') {
- //      steps {
- //      sh 'trufflehog3 https://github.com/roshangami/webgoat_devsecops.git -f json -o truffelhog_output.json || true'
- //      // sh './truffelhog_report.sh'
- //      }
- //    }
+    stage ('Check secrets') {
+      steps {
+      sh 'trufflehog3 https://github.com/roshangami/webgoat_devsecops.git -f json -o truffelhog_output.json || true'
+      // sh './truffelhog_report.sh'
+      }
+    }
     
- //    stage ('Software composition analysis') {
- //            steps {
- //                dependencyCheck additionalArguments: ''' 
- //                    -o "./" 
- //                    -s "./"
- //                    -f "ALL" 
- //                    --prettyPrint''', odcInstallation: 'OWASP-DC'
+    stage ('Software composition analysis') {
+            steps {
+                dependencyCheck additionalArguments: ''' 
+                    -o "./" 
+                    -s "./"
+                    -f "ALL" 
+                    --prettyPrint''', odcInstallation: 'OWASP-DC'
 
- //                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-	// //	    sh './dependency_check_report.sh'
- //            }
- //        }
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+	//	    sh './dependency_check_report.sh'
+            }
+        }
     
- //    stage ('SAST - SonarQube') {
- //      steps {
- //        withSonarQubeEnv('sonarqube') {
- //          sh 'mvn clean sonar:sonar -Dsonar.java.binaries=src'
-	//   //sh 'sudo python3 sonarqube.py'
-	//   //sh './sonarqube_report.sh'
- //        }
- //      }
- //    }
+    stage ('SAST - SonarQube') {
+      steps {
+        withSonarQubeEnv('sonarqube') {
+          sh 'mvn clean sonar:sonar -Dsonar.java.binaries=src'
+	  //sh 'sudo python3 sonarqube.py'
+	  //sh './sonarqube_report.sh'
+        }
+      }
+    }
 	  
 //       stage ('SAST-SemGrep') {
 // 	      steps {
@@ -61,22 +61,22 @@ pipeline {
 //         	}
 //       	}
     
-  //   stage ('Generate build') {
-  //     steps {
-  //       sh 'mvn clean install -DskipTests'
-  //     }
-  //   }  
+    stage ('Generate build') {
+      steps {
+        sh 'mvn clean install -DskipTests'
+      }
+    }  
 	  
-  //  stage ('Deploy to server') {
-  //           steps {
-	 //   timeout(time: 3, unit: 'MINUTES') {
-  //             sshagent(['app-server']) {
-  //               sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/webgoat-devsecops/webgoat-server/target/webgoat-server-v8.2.0-SNAPSHOT.jar apps@10.97.109.244:/WebGoat'
-		// sh 'ssh -o  StrictHostKeyChecking=no apps@10.97.109.244 "nohup java -jar /WebGoat/webgoat-server-v8.2.0-SNAPSHOT.jar --server.address=10.97.109.244 --server.port=9999 &"'
-  //                 }
-	 //     }
-  //       }     
-  //   }
+   stage ('Deploy to server') {
+            steps {
+	   timeout(time: 3, unit: 'MINUTES') {
+              sshagent(['app-server']) {
+                sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/webgoat-devsecops/webgoat-server/target/webgoat-server-v8.2.0-SNAPSHOT.jar apps@10.97.109.244:/WebGoat'
+		sh 'ssh -o  StrictHostKeyChecking=no apps@10.97.109.244 "nohup java -jar /WebGoat/webgoat-server-v8.2.0-SNAPSHOT.jar --server.address=10.97.109.244 --server.port=9999 &"'
+                  }
+	     }
+        }     
+    }
    
     stage ('DAST - OWASP ZAP') {
             steps {
@@ -87,13 +87,7 @@ pipeline {
               }      
            }       
     }
-  
-//    stage ('Host vulnerability assessment') {
-//        steps {
-//             sh 'echo "In-Progress"'
-//            }
-//    }
-
+	  
   // stage ('Security monitoring and misconfigurations') {
   //      steps {
 	 //		sh 'echo "AWS misconfiguration"'

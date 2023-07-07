@@ -16,7 +16,7 @@ pipeline {
     stage ('Check secrets') {
       steps {
       sh 'trufflehog3 https://github.com/roshangami/webgoat_devsecops.git -f json -o truffelhog_output.json || true'
-      // sh './truffelhog_report.sh'
+      sh './truffelhog_report.sh'
       }
     }
     
@@ -29,7 +29,7 @@ pipeline {
                     --prettyPrint''', odcInstallation: 'OWASP-DC'
 
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-	//	    sh './dependency_check_report.sh'
+		    sh './dependency_check_report.sh'
             }
         }
     
@@ -38,7 +38,7 @@ pipeline {
         withSonarQubeEnv('sonarqube') {
           sh 'mvn clean sonar:sonar -Dsonar.java.binaries=src'
 	  //sh 'sudo python3 sonarqube.py'
-	  //sh './sonarqube_report.sh'
+	  sh './sonarqube_report.sh'
         }
       }
     }
@@ -83,7 +83,7 @@ pipeline {
            sshagent(['dast-server']) {
                 sh 'ssh -o  StrictHostKeyChecking=no apps@10.97.109.243 "sudo docker run --rm -v /home/apps:/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t http://10.97.109.244:9999/WebGoat -x zap_report || true" '
 		//sh 'ssh -o  StrictHostKeyChecking=no apps@10.97.109.243 "sudo docker run --rm -v /home/apps:/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t http://10.97.109.244:8081/WebGoat -x zap_report -n defaultcontext.context || true" '
-		//sh 'ssh -o  StrictHostKeyChecking=no apps@10.97.109.243 "sudo ./zap_report.sh"'
+		sh 'ssh -o  StrictHostKeyChecking=no apps@10.97.109.243 "./zap_report.sh"'
               }      
            }       
     }

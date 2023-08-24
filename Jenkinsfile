@@ -19,7 +19,8 @@ pipeline {
       sh './truffelhog_report.sh'
       }
     }
-    
+  }
+}
 /*    stage ('Software composition analysis') {
             steps {
                 dependencyCheck additionalArguments: ''' 

@@ -18,9 +18,7 @@ pipeline {
       sh 'trufflehog3 https://github.com/purva1708/prpdevsecops.git -f json -o truffelhog_output.json || true'
       }
     }
-  }
-}
-/*    stage ('Software composition analysis') {
+      stage ('Software composition analysis') {
             steps {
                 dependencyCheck additionalArguments: ''' 
                     -o "./" 
@@ -32,7 +30,9 @@ pipeline {
 		    sh './dependency_check_report.sh'
             }
         }
-    
+  }
+}
+/*
     stage ('SAST - SonarQube') {
       steps {
         withSonarQubeEnv('sonarqube') {

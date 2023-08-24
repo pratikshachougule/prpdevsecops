@@ -16,7 +16,6 @@ pipeline {
     stage ('Check secrets') {
       steps {
       sh 'trufflehog3 https://github.com/purva1708/prpdevsecops.git -f json -o truffelhog_output.json || true'
-      sh './truffelhog_report.sh'
       }
     }
   }

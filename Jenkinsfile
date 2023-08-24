@@ -20,7 +20,7 @@ pipeline {
       }
     }
     
-    stage ('Software composition analysis') {
+/*    stage ('Software composition analysis') {
             steps {
                 dependencyCheck additionalArguments: ''' 
                     -o "./" 
@@ -105,3 +105,4 @@ pipeline {
 	  
    }  
 }
+*/

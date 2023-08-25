@@ -29,8 +29,15 @@ pipeline {
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
         }
-  
-    stage ('SAST - SonarQube') {
+  stage ('Static Analysis') {
+      steps {
+        withSonarQubeEnv('Sonarqube-scanner') {
+          sh 'mvn sonar:sonar'
+            
+        }
+      }
+    }
+/*    stage ('SAST - SonarQube') {
       steps {
         withSonarQubeEnv('sonarqube') {
           sh 'mvn clean sonar:sonar -Dsonar.java.binaries=src'
@@ -38,7 +45,7 @@ pipeline {
 	 // sh './sonarqube_report.sh' 
         }
       }
-    }
+    } */
   }
 } 
 /*

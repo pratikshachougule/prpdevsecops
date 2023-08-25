@@ -40,7 +40,8 @@ pipeline {
       }
     }
   }
-} */
+} 
+/*
 //       stage ('SAST-SemGrep') {
 // 	      steps {
 		      

@@ -29,14 +29,7 @@ pipeline {
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
         }
-  /* stage ('Static Analysis') {
-      steps {
-        withSonarQubeEnv('sonarqube-scanner') {
-          sh 'mvn sonar:sonar'
-            
-        }
-      }
-    } */
+  
     stage ('SAST - SonarQube') {
       steps {
         withSonarQubeEnv('sonar') {
@@ -46,9 +39,7 @@ pipeline {
         }
       }
     } 
-  }
-} 
-/*
+
 //       stage ('SAST-SemGrep') {
 // 	      steps {
 		      
@@ -72,7 +63,9 @@ pipeline {
         sh 'mvn clean install -DskipTests'
       }
     }  
-	  
+  }
+}
+/*	  
    stage ('Deploy to server') {
             steps {
 	   timeout(time: 3, unit: 'MINUTES') {

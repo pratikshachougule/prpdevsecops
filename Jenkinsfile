@@ -29,9 +29,7 @@ pipeline {
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
         }
-  }
-}
-/*
+  
     stage ('SAST - SonarQube') {
       steps {
         withSonarQubeEnv('sonarqube') {
@@ -41,7 +39,8 @@ pipeline {
         }
       }
     }
-	  
+  }
+} */
 //       stage ('SAST-SemGrep') {
 // 	      steps {
 		      

@@ -29,23 +29,23 @@ pipeline {
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
         }
-  stage ('Static Analysis') {
+  /* stage ('Static Analysis') {
       steps {
         withSonarQubeEnv('sonarqube-scanner') {
           sh 'mvn sonar:sonar'
             
         }
       }
-    }
-/*    stage ('SAST - SonarQube') {
+    } */
+    stage ('SAST - SonarQube') {
       steps {
-        withSonarQubeEnv('sonarqube') {
+        withSonarQubeEnv('sonarqube-scanner') {
           sh 'mvn clean sonar:sonar -Dsonar.java.binaries=src'
 	  //sh 'sudo python3 sonarqube.py'
 	 // sh './sonarqube_report.sh' 
         }
       }
-    } */
+    } 
   }
 } 
 /*

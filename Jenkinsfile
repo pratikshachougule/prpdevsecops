@@ -18,7 +18,9 @@ pipeline {
       sh 'trufflehog3 https://github.com/purva1708/prpdevsecops.git -f json -o truffelhog_output.json || true'
       }
     }
-      stage ('Software composition analysis') {
+  }
+}
+    /*  stage ('Software composition analysis') {
             steps {
                 dependencyCheck additionalArguments: ''' 
                     -o "./" 
@@ -59,7 +61,7 @@ pipeline {
 		      
 //         	}
 //       	}
-  /*
+  
     stage ('Generate build') {
       steps {
         sh 'mvn clean install -DskipTests'

@@ -57,7 +57,7 @@ pipeline {
 		      
 //         	}
 //       	}
-  /
+  
     stage ('Generate build') {
       steps {
         sh 'mvn clean install -DskipTests'
@@ -65,8 +65,8 @@ pipeline {
     } 
   }
 }
-	  /*
-   stage ('Deploy to server') {
+
+/*   stage ('Deploy to server') {
             steps {
 	   timeout(time: 3, unit: 'MINUTES') {
               sshagent(['app-server']) {
@@ -78,8 +78,8 @@ pipeline {
     }
   }
 }
-   */
- /*   stage ('DAST - OWASP ZAP') {
+   
+  stage ('DAST - OWASP ZAP') {
             steps {
            sshagent(['dast-server']) {
                 sh 'ssh -o  StrictHostKeyChecking=no apps@10.97.109.243 "sudo docker run --rm -v /home/apps:/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t http://10.97.109.244:9999/WebGoat -x zap_report || true" '

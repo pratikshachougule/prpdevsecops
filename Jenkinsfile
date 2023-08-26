@@ -30,12 +30,9 @@ pipeline {
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
         }
-  }
-}
-
 
   
-  /*  stage ('SAST - SonarQube') {
+   stage ('SAST - SonarQube') {
       steps {
         withSonarQubeEnv('sonar') {
           sh 'mvn clean sonar:sonar -Dsonar.java.binaries=src'
@@ -65,7 +62,7 @@ pipeline {
 //         	}
 //       	}
   
-    stage ('Generate build') {
+  /*  stage ('Generate build') {
       steps {
         sh 'mvn clean install -DskipTests'
       }

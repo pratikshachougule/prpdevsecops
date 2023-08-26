@@ -57,12 +57,15 @@ pipeline {
 		      
 //         	}
 //       	}
-    
+  /
     stage ('Generate build') {
       steps {
         sh 'mvn clean install -DskipTests'
       }
-    }  	  
+    } 
+  }
+}
+	  /*
    stage ('Deploy to server') {
             steps {
 	   timeout(time: 3, unit: 'MINUTES') {
@@ -75,7 +78,7 @@ pipeline {
     }
   }
 }
-   
+   */
  /*   stage ('DAST - OWASP ZAP') {
             steps {
            sshagent(['dast-server']) {

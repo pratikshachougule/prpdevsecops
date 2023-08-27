@@ -13,34 +13,34 @@ pipeline {
       }
      }
     
-  //   stage ('Check secrets') {
-  //     steps {
-  //     sh 'trufflehog3 https://github.com/purva1708/prpdevsecops.git -f json -o truffelhog_output.json || true'
-  //     }
-  //   }
+    stage ('Check secrets') {
+      steps {
+      sh 'trufflehog3 https://github.com/purva1708/prpdevsecops.git -f json -o truffelhog_output.json || true'
+      }
+    }
   
-  //     stage ('Software composition analysis') {
-  //           steps {
-  //               dependencyCheck additionalArguments: ''' 
-  //                   -o "./" 
-  //                   -s "./"
-  //                   -f "ALL" 
-  //                   --prettyPrint''', odcInstallation: 'owasp-dc'
+      stage ('Software composition analysis') {
+            steps {
+                dependencyCheck additionalArguments: ''' 
+                    -o "./" 
+                    -s "./"
+                    -f "ALL" 
+                    --prettyPrint''', odcInstallation: 'owasp-dc'
 
-  //               dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-  //           }
-  //       }
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+            }
+        }
 
   
-  //  stage ('SAST - SonarQube') {
-  //     steps {
-  //       withSonarQubeEnv('sonar') {
-  //         sh 'mvn clean sonar:sonar -Dsonar.java.binaries=src'
-	 //  //sh 'sudo python3 sonarqube.py'
-	 // // sh './sonarqube_report.sh' 
-  //       }
-  //     }
-  //   } 
+   stage ('SAST - SonarQube') {
+      steps {
+        withSonarQubeEnv('sonar') {
+          sh 'mvn clean sonar:sonar -Dsonar.java.binaries=src'
+	  //sh 'sudo python3 sonarqube.py'
+	 // sh './sonarqube_report.sh' 
+        }
+      }
+    } 
   
 
 

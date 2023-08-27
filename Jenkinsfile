@@ -4,14 +4,14 @@ pipeline {
     maven 'Maven'
   }
   stages {
-  //   stage ('Initialize') {
-  //     steps {
-  //       sh '''
-  //               echo "PATH = ${PATH}"
-  //               echo "M2_HOME = ${M2_HOME}"
-  //           ''' 
-  //     }
-  //    }
+    stage ('Initialize') {
+      steps {
+        sh '''
+                echo "PATH = ${PATH}"
+                echo "M2_HOME = ${M2_HOME}"
+            ''' 
+      }
+     }
     
   //   stage ('Check secrets') {
   //     steps {
@@ -43,23 +43,7 @@ pipeline {
   //   } 
   
 
-//       stage ('SAST-SemGrep') {
-// 	      steps {
-		      
-// 		   //sh 'sudo docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep --config=auto --output semgrep_output.json --json'
-// 		   sh './semgrep_report.sh'
 
-
-
-		      //sshagent(['semgrep-server']) {
-//	        sh '''
-//			ifconfig
-//		'''
-//			     //		ssh -o  StrictHostKeyChecking=no ubuntu@52.66.29.170 'sudo git clone https://github.com/pentesty/DevSecOps_Acc.git && sudo cd DevSecOps_Acc && sudo docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep --config auto  --output scan_results.json --json'
-// //		     }
-		      
-//         	}
-//       	}
   
     stage ('Generate build') {
       steps {
@@ -90,20 +74,7 @@ pipeline {
            }       
     }
 	  
-  // stage ('Security monitoring and misconfigurations') {
-  //      steps {
-	 //		sh 'echo "AWS misconfiguration"'
-   //          sh './securityhub.sh'
-   //         }
-   // }
 	  
-	
- //   stage ('Incidents report') {
- //        steps {
-	// sh 'echo "Final Report"'
- //         sh './final_report.sh'
- //        }
- //    }	  
 	  
    }  
 }

@@ -69,8 +69,8 @@ pipeline {
 
     stage ('Deploy to server') {
             steps {
-	   timeout(time: 3, unit: 'MINUTES') {
-              sshagent(['ubuntu']) {
+	   timeout(time: 10, unit: 'MINUTES') {
+              sshagent(['root']) {
                 sh 'scp -o StrictHostKeyChecking=no var/lib/jenkins/workspace/devsecops/webgoat-server/target/webgoat-server-v8.2.0-SNAPSHOT.jar root@15.206.127.110:/WebGoat'
 		sh 'ssh -o  StrictHostKeyChecking=no root@15.206.127.110  "nohup java -jar /WebGoat/webgoat-server-v8.2.0-SNAPSHOT.jar --server.address=15.206.127.110  --server.port=9999 &"'
                   }

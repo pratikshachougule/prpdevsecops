@@ -1,8 +1,5 @@
 pipeline {
   agent any 
-  // tools {
-  //   maven 'Maven'
-  // }
   stages {
     stage ('Initialize') {
       steps {
@@ -61,9 +58,7 @@ pipeline {
 	     }
         }     
     }
-  }
-}
-   
+
    stage ('DAST - OWASP ZAP') {
             steps {
            sshagent(['dast-server']) {
@@ -73,9 +68,6 @@ pipeline {
               }      
            }       
     }
-	  
-	  
-	  
-   }  
+  }
 }
 
